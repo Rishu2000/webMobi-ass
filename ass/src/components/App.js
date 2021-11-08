@@ -10,6 +10,12 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import ForumIcon from '@mui/icons-material/Forum';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import ComputerIcon from '@mui/icons-material/Computer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -83,7 +89,31 @@ function App() {
     </Box>
         </Grid>
         <Grid item>
-          Kumar
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" color="default">
+              <Toolbar>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+                  Admin Dashboard
+                </Typography>
+                <Typography component="div" sx={{border:'1px solid #a6a6a6', borderRadius:"4px"}}>
+                  <Typography component="div" sx={{color:'#a6a6a6', padding:'5px 10px', display:'flex', alignItems:'center'}}>
+                    preview on:
+                    <PhoneAndroidIcon sx={{marginLeft:'5px', cursor: 'pointer'}}/>
+                    <ComputerIcon sx={{marginLeft:'5px', cursor: 'pointer'}}/>
+                  </Typography>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+          </Box>
         </Grid>
         <Grid item sx={{display:'flex', flexDirection:'column', alignItems: 'center',pt:1, 
           border:"1px solid #d9d9d9", backgroundColor:"white", color:'gray'}}>
