@@ -164,7 +164,7 @@ function App() {
                             </AccordionSummary>
                             <AccordionDetails>
                               <Divider/>
-                              <List sx={{overflowY:'scroll', height:'300px'}}>
+                              <List sx={{overflowY:'scroll', height:'280px'}}>
                                 <ListItem component="div" disablePadding sx={{ pl: 3, pr: 3 }}>
                                   <ListItemText
                                     primary="Moderation"
