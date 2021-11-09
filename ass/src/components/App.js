@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/App.css';
-import {Grid, Tabs, Tab, Typography, Box} from "@mui/material";
-import PropTypes from 'prop-types';
+import {Grid, Tabs, Tab, Typography, Box, Card, Paper, CardContent, CardHeader, Divider} from "@mui/material";
 import PhoneIcon from '@mui/icons-material/Phone';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -16,46 +15,19 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import ComputerIcon from '@mui/icons-material/Computer';
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
+import LockIcon from '@mui/icons-material/Lock';
 
 function App() {
 
   const [value, setValue] = useState(0);
+  const [anotherValue, setAnotherValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const anotherHandleChange = (event, newValue) => {
+    setAnotherValue(newValue);
   };
 
   return (
@@ -77,14 +49,16 @@ function App() {
       <Tabs
         orientation="vertical"
         value={value}
+        textColor="secondary"
+        indicatorColor="secondary"
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'transparent' }}
       >
-        <Tab icon={<PhoneIcon/>} label="Events" {...a11yProps(0)} sx={{color:'#8c1aff'}}/>
-        <Tab icon={<AcUnitIcon/>} label="Teams" {...a11yProps(1)} sx={{color:'#8c1aff'}}/>
-        <Tab icon={<AddBoxIcon />} label="Analytics" {...a11yProps(2)} />
-        <Tab icon={<AddLocationIcon />} label="Results" {...a11yProps(3)} />
+        <Tab icon={<PhoneIcon/>} label="Events" sx={{color:'#8c1aff'}}/>
+        <Tab icon={<AcUnitIcon/>} label="Teams" sx={{color:'#8c1aff'}}/>
+        <Tab icon={<AddBoxIcon />} label="Analytics" />
+        <Tab icon={<AddLocationIcon />} label="Results" />
       </Tabs>
     </Box>
         </Grid>
@@ -113,6 +87,39 @@ function App() {
                 </Typography>
               </Toolbar>
             </AppBar>
+          </Box>
+          <Box sx={{ flexGrow: 1 }}>
+            <Paper sx={{margin:'30px 40px'}} elevation="5">
+              <Grid container>
+                <Grid item md={2} xs={12}>
+                  <Typography component="div" sx={{p:1, color:'#a6a6a6'}}>
+                    Event Settings
+                  </Typography>
+                  <Divider/>
+                  <Tabs
+                    orientation="vertical"
+                    value={anotherValue}
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    onChange={anotherHandleChange}
+                    aria-label="Vertical tabs example"
+                    sx={{ borderRight: 1, borderColor: 'transparent'}}
+                  >
+                    <Tab label="General" />
+                    <Tab label="Privacy" />
+                    <Tab label="Features" />
+                    <Tab label="Customization" />
+                    <Tab label="Intergration" />
+                    <Tab 
+                      icon={<LockIcon/>} 
+                      iconPosition="end" 
+                      label="Session Settings"/>
+                    <Tab label="My plans"/>
+                  </Tabs>
+                </Grid>
+                <Grid item md={10} xs={12}>Kumar</Grid>
+              </Grid>
+            </Paper>
           </Box>
         </Grid>
         <Grid item sx={{display:'flex', flexDirection:'column', alignItems: 'center',pt:1, 
