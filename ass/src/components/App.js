@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import '../styles/App.css';
-import {Grid, Tabs, Tab, Typography, Box, Card, Paper, CardContent, CardHeader, Divider} from "@mui/material";
+import {Grid, Tabs, Tab, Typography, Box, Paper, 
+  Divider, Button, List, ListItem, ListItemText, 
+  Switch, Accordion, AccordionSummary, AccordionDetails} from "@mui/material";
 import PhoneIcon from '@mui/icons-material/Phone';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -16,6 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import ComputerIcon from '@mui/icons-material/Computer';
 import LockIcon from '@mui/icons-material/Lock';
+import CancelIcon from '@mui/icons-material/Cancel';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function App() {
 
@@ -28,6 +32,12 @@ function App() {
 
   const anotherHandleChange = (event, newValue) => {
     setAnotherValue(newValue);
+  };
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChangeExpand = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
   };
 
   return (
@@ -89,10 +99,10 @@ function App() {
             </AppBar>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
-            <Paper sx={{margin:'30px 40px'}} elevation="5">
+            <Paper sx={{margin:'30px 40px', borderRadius:'15px'}} elevation="5">
               <Grid container>
-                <Grid item md={2} xs={12}>
-                  <Typography component="div" sx={{p:1, color:'#a6a6a6'}}>
+                <Grid item md={2} sm={4} xs={12}>
+                  <Typography component="div" sx={{color:'#a6a6a6', textAlign:'center', pt:2, pb:2}}>
                     Event Settings
                   </Typography>
                   <Divider/>
@@ -117,7 +127,113 @@ function App() {
                     <Tab label="My plans"/>
                   </Tabs>
                 </Grid>
-                <Grid item md={10} xs={12}>Kumar</Grid>
+                <Grid item md={10} sm={8} xs={12}>
+                  <Paper sx={{height:'100%', borderRadius:'15px'}} elevation={2}>
+                    <Grid container sx={{display:'grid', gridTemplateRows:'50px auto 100px'}}>
+                      <Grid item>
+                        <CancelIcon sx={{float:'right', p:2, cursor: 'pointer'}}/>
+                      </Grid>
+                      <Grid item sx={{display:'flex', justifyContent:'center'}}>
+                        <Box
+                          sx={{ width: '100%', height: "100%", maxWidth: 560, bgcolor: 'background.paper' }}
+                        >
+                          <Accordion
+                            expanded={expanded === "panel1"}
+                            onChange={handleChangeExpand("panel1")}
+                            sx={{width:"100%", boxShadow:'none'}}
+                          >
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1bh-content"
+                              id="panel1bh-header"
+                              sx={{ display: "flex", width:'100%', alignItems: "center", justifyContent:'space-between', color:'#9900cc'}}
+                            >
+                              <div style={{display: "flex", alignItems: "center", width:'100%'}}>
+                                <ForumIcon color="secondary" sx={{m:1}}/>
+                                <Typography
+                                  sx={{
+                                    flexShrink: 0,
+                                    fontSize: 24,
+                                    fontWeight: "bold"
+                                  }}
+                                >
+                                  Audience Q&A
+                                </Typography>
+                              </div>
+                              <Switch color="secondary" checked sx={{float:'right'}}/>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Divider/>
+                              <List sx={{overflowY:'scroll', height:'300px'}}>
+                                <ListItem component="div" disablePadding sx={{ pl: 3, pr: 3 }}>
+                                  <ListItemText
+                                    primary="Moderation"
+                                    secondary="Easily review all questions before thry go live."
+                                  />
+                                  <Switch color="secondary" />
+                                </ListItem>
+                                <ListItem component="div" disablePadding sx={{ pl: 3, pr: 3 }}>
+                                  <ListItemText
+                                    primary="Labels"
+                                    secondary="Categorize and filter questions."
+                                  />
+                                  <Switch color="secondary" checked />
+                                </ListItem>
+                                <ListItem component="div" disablePadding sx={{pl:3, pr:3}}>
+                                <ListItemText primary='Downvotes' secondary='Enable downvoting of questions.'/>
+                                <Switch
+                                  color="secondary"
+                                  checked
+                                />
+                              </ListItem>
+                              <ListItem component="div" disablePadding sx={{pl:3, pr:3}}>
+                                <ListItemText primary='Replies' secondary='Enable downvoting of questions.'/>
+                                <Switch
+                                  color="secondary"
+                                />
+                              </ListItem>
+                              <ListItem component="div" disablePadding sx={{pl:3, pr:3}}>
+                                <ListItemText primary='Anonymous questions' secondary='Enable downvoting of questions.'/>
+                                <Switch
+                                  color="secondary"
+                                />
+                              </ListItem>
+                              <ListItem component="div" disablePadding sx={{pl:3, pr:3}}>
+                                <ListItemText primary='Maximum question length' secondary={
+                                  <React.Fragment>
+                                    {" Show number of votes insted of percentage."}
+                                    <Typography
+                                      component="div"
+                                      variant="body2"
+                                      sx={{mt:2}}
+                                    >
+                                      <Button color="secondary" variant="outlined" sx={{mr:2}}>160</Button>
+                                      <Button color="secondary" variant="outlined" sx={{mr:2}}>240</Button>
+                                      <Button color="secondary" variant="contained">300</Button>
+                                    </Typography>
+                                  </React.Fragment>
+                                }/>
+                                <Switch
+                                  color="secondary"
+                                />
+                              </ListItem>
+                              <ListItem component="div" disablePadding sx={{pl:3, pr:3}}>
+                                <ListItemText primary='Close questions' secondary='Enable downvoting of questions.'/>
+                                <Switch
+                                  color="secondary"
+                                />
+                              </ListItem>
+                              </List>
+                            </AccordionDetails>
+                          </Accordion>
+                        </Box>
+                      </Grid>
+                      <Grid item sx={{display:'flex', alignItems: 'center', justifyContent: 'flex-end', pr:5}}>
+                        <Button color="secondary" variant="contained" sx={{paddingRight:6, paddingLeft:6}}>Save</Button>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Grid>
               </Grid>
             </Paper>
           </Box>
